@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="History">
+    <option name="requestHistoryStates">
+      <list>
+        <requestHistoryState>
+          <option name="dateTime" value="1777404807350" />
+          <option name="id" value="b22be414-22dc-4927-b9d9-f119e8c6da42" />
+          <option name="request">
+            <requestState>
+              <option name="body">
+                <bodyState>
+                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang&quot;,&#10;  &quot;email&quot;: &quot;umang@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
+                  <option name="type" value="JSON" />
+                </bodyState>
+              </option>
+              <option name="id" value="0f7ca7ba-5897-4caf-bcbc-417bad930616" />
+              <option name="method" value="POST" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/api/auth/register" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJtZXNzYWdlIjp7Im5hbWUiOiJ1bWFuZyIsImVtYWlsIjoidW1hbmdAaG1haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMDgkMTBVdWcuUXpOd04yVWpPcXpZRzhPLmQ3VFROcmNQd3Z5aElTUXA3aXZMbnJZYTNHWUQ2SzIiLCJfaWQiOiI2OWYxMGI4N2U5YjRiN2IxMWNkODM5ODgiLCJjcmVhdGVkQXQiOiIyMDI2LTA0LTI4VDE5OjMzOjI3LjI1MVoiLCJ1cGRhdGVkQXQiOiIyMDI2LTA0LTI4VDE5OjMzOjI3LjI1MVoiLCJfX3YiOjB9fQ==" />
+              <option name="bodyString" value="{&#10;  &quot;message&quot;: {&#10;    &quot;name&quot;: &quot;umang&quot;,&#10;    &quot;email&quot;: &quot;umang@hmail.com&quot;,&#10;    &quot;password&quot;: &quot;$2b$08$10Uug.QzNwN2UjOqzYG8O.d7TTNrcPwvyhISQp7ivLnrYa3GYD6K2&quot;,&#10;    &quot;_id&quot;: &quot;69f10b87e9b4b7b11cd83988&quot;,&#10;    &quot;createdAt&quot;: &quot;2026-04-28T19:33:27.251Z&quot;,&#10;    &quot;updatedAt&quot;: &quot;2026-04-28T19:33:27.251Z&quot;,&#10;    &quot;__v&quot;: 0&#10;  }&#10;}" />
+              <option name="code" value="201" />
+              <option name="connectionEstablishingTime" value="162" />
+              <option name="contentType" value="application/json" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="vary" />
+                    <option name="value" value="rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="content-type" />
+                    <option name="value" value="application/json" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Tue, 28 Apr 2026 19:33:27 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Transfer-Encoding" />
+                    <option name="value" value="chunked" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="b22be414-22dc-4927-b9d9-f119e8c6da42" />
+              <option name="message" value="Created" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;message&quot;:{&quot;name&quot;:&quot;umang&quot;,&quot;email&quot;:&quot;umang@hmail.com&quot;,&quot;password&quot;:&quot;$2b$08$10Uug.QzNwN2UjOqzYG8O.d7TTNrcPwvyhISQp7ivLnrYa3GYD6K2&quot;,&quot;_id&quot;:&quot;69f10b87e9b4b7b11cd83988&quot;,&quot;createdAt&quot;:&quot;2026-04-28T19:33:27.251Z&quot;,&quot;updatedAt&quot;:&quot;2026-04-28T19:33:27.251Z&quot;,&quot;__v&quot;:0}}" />
+              <option name="size" value="247" />
+              <option name="time" value="3149" />
+            </responseState>
+          </option>
+          <option name="workspaceId" value="drafts" />
+        </requestHistoryState>
+      </list>
+    </option>
+  </component>
+</project>
