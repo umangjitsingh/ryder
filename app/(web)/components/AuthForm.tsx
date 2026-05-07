@@ -1,46 +1,50 @@
 "use client"
 
-import {motion} from 'motion/react';
-import React from 'react'
+
+import React, {useEffect} from 'react'
 import Login from "@/app/(web)/components/Login";
 import Logo from "@/app/(web)/components/Logo";
 import Register from "@/app/(web)/components/registerForm";
+import {useSelector, useDispatch} from "react-redux";
 
-interface propType {
-		open: boolean;
-		onClose: () => void
-}
+import {closeModal, setFormType, selectIsModalOpen, selectFormType} from "@/app/redux/modalSlice";
 
-const AuthForm = ({open, onClose}: propType) => {
-		return (
-			<>
-					{open && <motion.div
-             initial={{opacity: 0}}
-             animate={{opacity: 1}}
-             className=" bg-[#171717]/90  fixed inset-0 backdrop-blur-xl z-20"
-             // onClick={onClose}
-          >
-             <div className=" p-8">
-                <Logo/>
-             </div>
-             <motion.div
-                initial={{opacity: 0, scale: 0.96, y: 40}}
-                animate={{opacity: 1, scale: 1, y: 0}}
-                transition={{duration: 0.4, ease: 'easeIn'}}
-                className=" fixed inset-0 z-30  flex items-center justify-center px-4">
+const AuthForm = () => {
+	const dispatch = useDispatch();
+	const isModalOpen = useSelector(selectIsModalOpen);
+	const formType = useSelector(selectFormType);
+
+	// Close modal when it's no longer open
+	useEffect(() => {
+		if (!isModalOpen) {
+			// Reset form type when modal closes
+			dispatch(setFormType('login'));
+		}
+	}, [isModalOpen, dispatch]);
+
+	const handleClose = () => {
+		dispatch(closeModal());
+	};
 
 
-                <div className="w-full max-w-md relative  h-2/5">
-                   <Login onClose={onClose}/>
-	                 {/*<Register/>*/}
-                </div>
+	return (
+		<>
+			{isModalOpen && <div
+				className=" bg-[#171717]/90  fixed inset-0 backdrop-blur-xl z-20"
+				onClick={handleClose}
+			>
 
+				<div
+					className=" fixed inset-0 z-30  flex items-center justify-center px-4">
 
-             </motion.div>
-          </motion.div>}
+					<div className="w-full max-w-md relative  h-2/5">
+						{formType === 'login' ? <Login onClose={handleClose} /> : <Register onClose={handleClose} />}
+					</div>
 
-			</>
+				</div>
+			</div>}
+		</>
 
-		)
+	)
 }
 export default AuthForm

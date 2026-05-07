@@ -6,10 +6,16 @@
       <node color="4" path="$PROJECT_DIR$/app" />
       <node color="5" path="$PROJECT_DIR$/app/(web)" />
       <node color="6" path="$PROJECT_DIR$/app/api" />
+      <node color="5" path="$PROJECT_DIR$/app/bookings" />
       <node color="6" path="$PROJECT_DIR$/app/global.d.ts" />
+      <node color="5" path="$PROJECT_DIR$/app/globals.css" />
+      <node color="5" path="$PROJECT_DIR$/app/layout.tsx" />
       <node color="6" path="$PROJECT_DIR$/app/lib" />
       <node color="5" path="$PROJECT_DIR$/app/loginPage" />
       <node color="6" path="$PROJECT_DIR$/app/models" />
+      <node color="5" path="$PROJECT_DIR$/app/page.tsx" />
+      <node color="5" path="$PROJECT_DIR$/app/providers.tsx" />
+      <node color="7" path="$PROJECT_DIR$/app/redux" />
       <node color="6" path="$PROJECT_DIR$/app/types" />
       <node color="6" path="$PROJECT_DIR$/app/types.d.ts" />
     </files>

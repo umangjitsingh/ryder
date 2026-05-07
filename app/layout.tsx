@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {Arimo, Rubik} from "next/font/google";
 import "./globals.css";
+import {Providers} from "@/app/providers";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -36,7 +37,12 @@ export default function RootLayout({
       lang="en"
       className={`${rubik.variable} ${arimo.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+      <Providers>
+        {children}
+      </Providers>
+
+      </body>
     </html>
   );
 }
