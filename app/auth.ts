@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import connectDb from "@/app/lib/db";
-import User from "@/app/models/user.model";
+import connectDb from "./lib/db";
+import User from "./models/user.model";
 import bcryptjs from "bcryptjs";
 import Google from "next-auth/providers/google"
 
@@ -23,19 +23,19 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
 						authorize: async (credentials) => {
 
 								if (!credentials.email || !credentials.password) {
-										throw new Error("missing credentials.")
+									return null
 								}
 
 								await connectDb();
 
 								const user = await User.findOne({email: credentials?.email})
 								if (!user) {
-										throw new Error("user not found")
+										return null
 								}
 
 								const verifyPassword = await bcryptjs.compare(credentials?.password as string, user.password);
 								if (!verifyPassword) {
-										throw new Error("incorrect credentials")
+										return null
 								}
 
 								return {

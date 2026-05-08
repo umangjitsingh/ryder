@@ -8,7 +8,7 @@
             <requestState>
               <option name="body">
                 <bodyState>
-                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang&quot;,&#10;  &quot;email&quot;: &quot;umang@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
+                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang12&quot;,&#10;  &quot;email&quot;: &quot;umang11@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
                   <option name="type" value="JSON" />
                 </bodyState>
               </option>

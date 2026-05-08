@@ -5,27 +5,28 @@ import bcryptjs from "bcryptjs"
 
 export const POST = async (req: NextRequest) => {
 		try {
-				const {name, email, password} = await req.json();
-				await connectDb();
+			const {name, email, password} = await req.json();
+			await connectDb();
 
-				let user = await User.findOne({email})
-				if (user) {
-						return NextResponse.json({message:"email already exist"},{status:400})
-				}
+			let user = await User.findOne({email})
+			if (user) {
+				return NextResponse.json({message:"email already exist"},{status:400})
+			}
 
-				if(password.length < 4){
-						return NextResponse.json({message:"password must be greater than 4 digits"},{status:400})
-				}
+			if(password.length < 4){
+				return NextResponse.json({message:"password must be greater than 4 digits"},{status:400})
+			}
 
-				const hashedPassword=await bcryptjs.hash(password,8);
+			const hashedPassword=await bcryptjs.hash(password,8);
 
-				user =await User.create({
-						name,email,password:hashedPassword
-				})
-				return NextResponse.json({message:user},{status:201})
+			user =await User.create({
+				name,email,password:hashedPassword
+			});
+			return NextResponse.json({message:"Registration successful!"},{status:201});
 
 		} catch (e : unknown) {
-				const errorMessage = e instanceof Error ? e.message : "An unexpected error occurred";
-				return NextResponse.json({message: errorMessage},{status:500})
+			console.error("Register API error:", e);
+			const errorMessage = e instanceof Error ? e.message : "An unexpected error occurred";
+			return NextResponse.json({message: errorMessage},{status:500})
 		}
 }

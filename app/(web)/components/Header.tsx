@@ -29,7 +29,8 @@ const Header = () => {
 													hrefs.map((h, i) => {
 																const href = (h == "Home") ? "/" : `/${h.toLowerCase()}`;
 																const active = href == pathname;
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 																return <Link key={i} href={href} className={`${active ? "text-green-400" : "text-gray-300"} cursor-pointer text-gray-300 hover:text-green-400 font-medium transition-colors duration-200 `}>{h}</Link>
 														}
 													)

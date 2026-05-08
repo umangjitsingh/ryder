@@ -16,6 +16,7 @@
       <node color="5" path="$PROJECT_DIR$/app/page.tsx" />
       <node color="5" path="$PROJECT_DIR$/app/providers.tsx" />
       <node color="7" path="$PROJECT_DIR$/app/redux" />
+      <node color="10" path="$PROJECT_DIR$/app/serverActions" />
       <node color="6" path="$PROJECT_DIR$/app/types" />
       <node color="6" path="$PROJECT_DIR$/app/types.d.ts" />
     </files>
@@ -29,6 +30,7 @@
       <color id="7" value="#311333" name="Color 7" enabled="true" />
       <color id="8" value="#262626d7" name="Color 8" enabled="true" />
       <color id="9" value="#403506df" name="Color 9" enabled="true" />
+      <color id="10" value="#232323f0" name="Color 10" enabled="true" />
     </colors>
     <option name="marksForCollapsedHighlights" value="Dots" />
   </component>

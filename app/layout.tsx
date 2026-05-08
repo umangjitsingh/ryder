@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {Arimo, Rubik} from "next/font/google";
 import "./globals.css";
 import {Providers} from "@/app/providers";
+import {Toaster} from "react-hot-toast";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -40,6 +41,18 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
       <Providers>
         {children}
+        <Toaster
+          position="bottom-center"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              border: '1px solid #713200',
+              padding: '16px',
+              background: "#111",
+              color: "#fff",
+            },
+          }}
+        />
       </Providers>
 
       </body>

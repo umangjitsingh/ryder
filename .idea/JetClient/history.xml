@@ -65,6 +65,192 @@
           </option>
           <option name="workspaceId" value="drafts" />
         </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1778253436798" />
+          <option name="id" value="c5e1afd2-24be-409b-a454-05f755f4f4fa" />
+          <option name="request">
+            <requestState>
+              <option name="body">
+                <bodyState>
+                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang&quot;,&#10;  &quot;email&quot;: &quot;umang@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
+                  <option name="type" value="JSON" />
+                </bodyState>
+              </option>
+              <option name="id" value="0f7ca7ba-5897-4caf-bcbc-417bad930616" />
+              <option name="method" value="POST" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/api/auth/register" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJtZXNzYWdlIjoiZW1haWwgYWxyZWFkeSBleGlzdCJ9" />
+              <option name="bodyString" value="{&#10;  &quot;message&quot;: &quot;email already exist&quot;&#10;}" />
+              <option name="code" value="400" />
+              <option name="connectionEstablishingTime" value="157" />
+              <option name="contentType" value="application/json" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="vary" />
+                    <option name="value" value="rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="content-type" />
+                    <option name="value" value="application/json" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Fri, 08 May 2026 15:17:16 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Transfer-Encoding" />
+                    <option name="value" value="chunked" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="c5e1afd2-24be-409b-a454-05f755f4f4fa" />
+              <option name="message" value="Bad Request" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;message&quot;:&quot;email already exist&quot;}" />
+              <option name="size" value="33" />
+              <option name="time" value="2419" />
+            </responseState>
+          </option>
+          <option name="workspaceId" value="drafts" />
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1778253444163" />
+          <option name="id" value="469592e2-8bd4-4dd9-b11a-23a133e5b1b2" />
+          <option name="request">
+            <requestState>
+              <option name="body">
+                <bodyState>
+                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang12&quot;,&#10;  &quot;email&quot;: &quot;umang@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
+                  <option name="type" value="JSON" />
+                </bodyState>
+              </option>
+              <option name="id" value="0f7ca7ba-5897-4caf-bcbc-417bad930616" />
+              <option name="method" value="POST" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/api/auth/register" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJtZXNzYWdlIjoiZW1haWwgYWxyZWFkeSBleGlzdCJ9" />
+              <option name="bodyString" value="{&#10;  &quot;message&quot;: &quot;email already exist&quot;&#10;}" />
+              <option name="code" value="400" />
+              <option name="connectionEstablishingTime" value="3" />
+              <option name="contentType" value="application/json" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="vary" />
+                    <option name="value" value="rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="content-type" />
+                    <option name="value" value="application/json" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Fri, 08 May 2026 15:17:24 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Transfer-Encoding" />
+                    <option name="value" value="chunked" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="469592e2-8bd4-4dd9-b11a-23a133e5b1b2" />
+              <option name="message" value="Bad Request" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;message&quot;:&quot;email already exist&quot;}" />
+              <option name="size" value="33" />
+              <option name="time" value="209" />
+            </responseState>
+          </option>
+          <option name="workspaceId" value="drafts" />
+        </requestHistoryState>
+        <requestHistoryState>
+          <option name="dateTime" value="1778253453944" />
+          <option name="id" value="4ce84bb0-2051-4f92-97cd-04098c3171a2" />
+          <option name="request">
+            <requestState>
+              <option name="body">
+                <bodyState>
+                  <option name="raw" value="{&#10;  &quot;name&quot;: &quot;umang12&quot;,&#10;  &quot;email&quot;: &quot;umang11@hmail.com&quot;,&#10;  &quot;password&quot;: &quot;umang12&quot;&#10;}" />
+                  <option name="type" value="JSON" />
+                </bodyState>
+              </option>
+              <option name="id" value="0f7ca7ba-5897-4caf-bcbc-417bad930616" />
+              <option name="method" value="POST" />
+              <option name="name" value="Draft" />
+              <option name="url" value="http://localhost:3000/api/auth/register" />
+            </requestState>
+          </option>
+          <option name="response">
+            <responseState>
+              <option name="bodyBytesBase64" value="eyJtZXNzYWdlIjp7Im5hbWUiOiJ1bWFuZzEyIiwiZW1haWwiOiJ1bWFuZzExQGhtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDA4JFd4d0RpU1JrTGpuTW1CLzNDS3JJdmVoZ2o1eHptT3lDdmgwYjZxRGdweTBBMHBuY3NjVVUuIiwicm9sZSI6InVzZXIiLCJfaWQiOiI2OWZkZmU4ZDhiODYyMWIzODJlZmY0ZmUiLCJjcmVhdGVkQXQiOiIyMDI2LTA1LTA4VDE1OjE3OjMzLjg1N1oiLCJ1cGRhdGVkQXQiOiIyMDI2LTA1LTA4VDE1OjE3OjMzLjg1N1oiLCJfX3YiOjB9fQ==" />
+              <option name="bodyString" value="{&#10;  &quot;message&quot;: {&#10;    &quot;name&quot;: &quot;umang12&quot;,&#10;    &quot;email&quot;: &quot;umang11@hmail.com&quot;,&#10;    &quot;password&quot;: &quot;$2b$08$WxwDiSRkLjnMmB/3CKrIvehgj5xzmOyCvh0b6qDgpy0A0pncscUU.&quot;,&#10;    &quot;role&quot;: &quot;user&quot;,&#10;    &quot;_id&quot;: &quot;69fdfe8d8b8621b382eff4fe&quot;,&#10;    &quot;createdAt&quot;: &quot;2026-05-08T15:17:33.857Z&quot;,&#10;    &quot;updatedAt&quot;: &quot;2026-05-08T15:17:33.857Z&quot;,&#10;    &quot;__v&quot;: 0&#10;  }&#10;}" />
+              <option name="code" value="201" />
+              <option name="connectionEstablishingTime" value="4" />
+              <option name="contentType" value="application/json" />
+              <option name="headers">
+                <list>
+                  <headerState>
+                    <option name="key" value="vary" />
+                    <option name="value" value="rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="content-type" />
+                    <option name="value" value="application/json" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Date" />
+                    <option name="value" value="Fri, 08 May 2026 15:17:33 GMT" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Connection" />
+                    <option name="value" value="keep-alive" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Keep-Alive" />
+                    <option name="value" value="timeout=5" />
+                  </headerState>
+                  <headerState>
+                    <option name="key" value="Transfer-Encoding" />
+                    <option name="value" value="chunked" />
+                  </headerState>
+                </list>
+              </option>
+              <option name="id" value="4ce84bb0-2051-4f92-97cd-04098c3171a2" />
+              <option name="message" value="Created" />
+              <option name="prettyResponseType" value="JSON" />
+              <option name="rawBodyString" value="{&quot;message&quot;:{&quot;name&quot;:&quot;umang12&quot;,&quot;email&quot;:&quot;umang11@hmail.com&quot;,&quot;password&quot;:&quot;$2b$08$WxwDiSRkLjnMmB/3CKrIvehgj5xzmOyCvh0b6qDgpy0A0pncscUU.&quot;,&quot;role&quot;:&quot;user&quot;,&quot;_id&quot;:&quot;69fdfe8d8b8621b382eff4fe&quot;,&quot;createdAt&quot;:&quot;2026-05-08T15:17:33.857Z&quot;,&quot;updatedAt&quot;:&quot;2026-05-08T15:17:33.857Z&quot;,&quot;__v&quot;:0}}" />
+              <option name="size" value="265" />
+              <option name="time" value="201" />
+            </responseState>
+          </option>
+          <option name="workspaceId" value="drafts" />
+        </requestHistoryState>
       </list>
     </option>
   </component>
