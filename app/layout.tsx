@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Arimo, Rubik} from "next/font/google";
+import {Arimo, Rubik, Oswald} from "next/font/google";
 import "./globals.css";
 import {Providers} from "@/app/providers";
 import {Toaster} from "react-hot-toast";
@@ -17,6 +17,12 @@ const arimo = Arimo({
   weight:["400","500","600","700"],
   subsets: ["latin"]
 });
+
+const time=Oswald({
+  variable:"--font-time",
+  weight:["200","400"],
+  subsets:["latin"]
+})
 
 
 
@@ -36,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${rubik.variable} ${arimo.variable} h-full antialiased`}
+      className={`${rubik.variable} ${arimo.variable} ${time.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
       <Providers>

@@ -7,14 +7,14 @@ export interface RegisterState {
 
 export async function doRegister(previousState: RegisterState, formData: FormData): Promise<RegisterState> {
 
-
 		try {
-
 
 			// Get form data and validate
 			const name = formData.get("name");
 			const email = formData.get("email");
 			const password = formData.get("password");
+
+			console.log("Registration attempt:", { name, email, password: '***' });
 
 			// Validate required fields
 			if (!name || !email || !password) {
@@ -25,7 +25,7 @@ export async function doRegister(previousState: RegisterState, formData: FormDat
 			}
 
 
-			const url = new URL('/api/auth/register', 'http://localhost:3000');
+			const url = new URL('/api/auth/register', process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000');
 			const res = await fetch(url, {
 				method: "POST",
 				headers: {
@@ -40,6 +40,7 @@ export async function doRegister(previousState: RegisterState, formData: FormDat
 
 			if (!res.ok) {
 				const errorData = await res.json();
+				console.error("Registration API error:", errorData);
 				return {
 					success: false,
 					message: errorData.message || "Registration failed"
@@ -47,9 +48,10 @@ export async function doRegister(previousState: RegisterState, formData: FormDat
 			}
 
 			const data = await res.json();
+
 			return {
 				success: true,
-				message: data.message || "Registration successful!"
+				message: data.message || "Please check your email for OTP."
 			};
 		} catch (e: unknown) {
 			console.error("Registration error:", e);

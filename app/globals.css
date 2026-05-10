@@ -16,3 +16,6 @@ body {
 .rubik {
     font-family: var(--font-rubik), sans-serif;
 }
+.time {
+    font-family: var(--font-time),sans-serif;
+}

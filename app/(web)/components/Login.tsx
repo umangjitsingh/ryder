@@ -8,24 +8,30 @@ import {useDispatch} from "react-redux";
 import {setFormType} from "@/app/redux/modalSlice";
 import toast from "react-hot-toast";
 import {doLogin, LoginState} from "@/app/serverActions/login";
+import {signIn, useSession} from "next-auth/react";
 
 
 export default function Login({onClose}: { onClose: () => void }) {
 		const [showPassword, setShowPassword] = useState(false);
 		const dispatch = useDispatch();
+		const {data}=useSession();
+		console.log("data->",data)
 		const initialState:LoginState={
 				success:false,
 				errors:{}
 		}
 
 		const [state,formAction,isPending]=useActionState(doLogin,initialState);
-		useEffect(()=>{
-				if(state.success){
-						toast.success("User logged successfully 👏");
-						// Close modal after successful login
-						onClose();
+		useEffect(() => {
+				if (state.message) {
+						// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+						state.success ? toast.success(state.message) : toast.error(state.message);
 				}
-		},[ state.success, onClose])
+		}, [state.message, state.success]);
+
+		async function handleGoogleLogin() {
+				await signIn("google")
+		}
 
 		return (
 			<div className="text-gray-300 py-2">
@@ -37,7 +43,7 @@ export default function Login({onClose}: { onClose: () => void }) {
 							<h1 className="text-2xl font-semibold">Welcome back</h1>
 							<h6 className="text-sm text-gray-400 leading-8">Sign in to your account</h6>
 
-							<button className="flex items-center justify-center gap-2 bg-[#212121] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] outline outline-white/20 outline-offset-4 hover:outline-white/30 rounded-lg py-3 w-full mt-4 font-semibold text-base">
+							<button onClick={handleGoogleLogin}  className="flex items-center justify-center gap-2 bg-[#212121] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] outline outline-white/20 outline-offset-4 hover:outline-white/30 rounded-lg py-3 w-full mt-4 font-semibold text-base">
 									<IoLogoGoogle className="h-5 w-5 text-white/40"/>
 									Continue with Google
 							</button>
@@ -54,26 +60,35 @@ export default function Login({onClose}: { onClose: () => void }) {
 											<input
 												type="email"
 												name="email"
+												autoComplete="email"
 												placeholder="you@example.com"
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 py-1.5 placeholder-white/50"
 												required
 												disabled={isPending}
 											/>
-											{state?.errors?.email && (<p className="text-sm text-red-600">{state?.errors.email}</p>)}
+											{state?.errors?.email && (<p className="text-sm text-red-600">{state?.errors.email.map((item,index) => (
+												<div key={index}>
+														{item}
+												</div>
+											))}</p>)}
 									</div>
 
 									<div className="flex flex-col mt-4 relative">
 											<label className="text-sm text-white mb-2">Password</label>
 											<input
-												type={showPassword ? "text" : "password"}
 												name="password"
-												placeholder="••••••"
-												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2.5 placeholder-white/50"
-												required
+												type={showPassword ? "password" : "text"}
+												placeholder="......"
+												autoComplete="new-password"
+												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2 pt-1 placeholder-white/50 placeholder:text-2xl -placeholder:tracking-tighter placeholder:font-serif  "
 												disabled={isPending}
 											/>
 											{state?.errors?.password && (
-												<p className="text-sm text-red-600">{state?.errors?.password}</p>
+												<p className="text-sm text-red-600">{state?.errors?.password.map((item,index) => (
+													<div key={index}>
+															{item}
+													</div>
+												))}</p>
 											)}
 											<div
 												className="bg-[#202020] h-8 w-8 absolute right-0.75 top-7.75 rounded-md flex items-center justify-center border border-white/10 hover:border-white/20 cursor-pointer"
@@ -89,10 +104,6 @@ export default function Login({onClose}: { onClose: () => void }) {
 									>
 											Sign in
 									</button>
-
-									{
-										state.message && (<p className={`text-sm ${state.success ? "text-green-600" : "text-red-600"}`}>{state.message}</p>)
-									}
 
 									<div className="w-full flex items-center justify-center mt-8">
             <span className="text-sm text-white/70">

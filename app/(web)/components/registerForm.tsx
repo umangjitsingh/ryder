@@ -3,12 +3,13 @@ import {IoLogoGoogle} from "react-icons/io";
 import {LuEye, LuEyeClosed} from "react-icons/lu";
 import {MdClose} from "react-icons/md";
 import {useDispatch} from "react-redux";
-import {setFormType} from "@/app/redux/modalSlice";
+import {setFormType, setEmail} from "@/app/redux/modalSlice";
 import {doRegister, RegisterState} from "@/app/serverActions/register";
 import toast from "react-hot-toast";
 
 const Register = ({onClose}: { onClose: () => void }) => {
-		const [showPassword, setShowPassword] = useState(false)
+		const [showPassword, setShowPassword] = useState(false);
+		const [email, setEmailLocal] = useState("");
 		const dispatch = useDispatch();
 		const initialState: RegisterState = {
 				success: false,
@@ -19,13 +20,17 @@ const Register = ({onClose}: { onClose: () => void }) => {
 		
 		useEffect(()=>{
 				if(state.success){
-						toast.success("user saved successfully 👏");
+						toast.success(state?.message as string);
+						// Store email and switch to OTP form
+						if (email) dispatch(setEmail(email));
 						const timer = setTimeout(()=>{
-								onClose()
+								dispatch(setFormType("otp"));
 						},1000);
 						return ()=>clearTimeout(timer)
+				} else if (state.message && !state.success) {
+						toast.error(state?.message as string);
 				}
-		},[onClose, state.success])
+		},[onClose, state.success, state.message, dispatch, email])
 
 		return (
 			<div className="text-gray-300 py-2">
@@ -55,6 +60,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 											<input
 												name="name"
 												type="text"
+												autoComplete="name"
 												placeholder="your name"
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 py-1.5 placeholder-white/50 placeholder:text-[15px] placeholder:tracking-wide"
 												disabled={isPending}
@@ -67,9 +73,12 @@ const Register = ({onClose}: { onClose: () => void }) => {
 											<input
 												name="email"
 												type="email"
+												autoComplete="email"
 												placeholder="you@example.com"
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 py-1.5 placeholder-white/50 placeholder:text-[15px] placeholder:tracking-wide"
 												disabled={isPending}
+												onChange={(e) => setEmailLocal(e.target.value)}
+												value={email}
 											/>
 											{state?.errors?.email && (<p className="text-sm text-red-600">{state.errors.email}</p>)}
 									</div>
@@ -80,7 +89,8 @@ const Register = ({onClose}: { onClose: () => void }) => {
 												name="password"
 												type={showPassword ? "password" : "text"}
 												placeholder="......"
-												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2 pt-1 placeholder-white/50 placeholder:text-2xl -placeholder:tracking-tighter placeholder:font-mono "
+												autoComplete="new-password"
+												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2 pt-1 placeholder-white/50 placeholder:text-2xl -placeholder:tracking-tighter placeholder:font-serif  "
 												disabled={isPending}
 											/>
 											{state?.errors?.password && (
@@ -91,14 +101,10 @@ const Register = ({onClose}: { onClose: () => void }) => {
 											</div>
 									</div>
 
-									<button className="w-full px-6 py-2 mt-6 bg-[#006239] text-white rounded-lg hover:bg-[#006239]/90 border border-teal-700 hover:border-teal-600 transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg"
+									<button type="submit" className="w-full px-6 py-2 mt-6 bg-[#006239] text-white rounded-lg hover:bg-[#006239]/90 border border-teal-700 hover:border-teal-600 transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg" 
 									disabled={isPending}>
-											{isPending ? "Creating your account" :"Register"}
+											{isPending ? "...Loading" :"Verify Email"}
 									</button>
-
-									{
-											state.message && (<p className={`text-sm ${state.success ? "text-green-600" : "text-red-600"}`}>{state.message}</p>)
-									}
 
 									<div className="w-full flex items-center justify-center mt-8">
 											<span className="text-sm text-white/70">Already have an account? <span className="underline text-white font-medium cursor-pointer" onClick={() => dispatch(setFormType('login'))}>Sign in</span></span>
