@@ -4,7 +4,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-const MONGO_URL = process.env.MONGO_URL || 'mongodb+srv://umangjit1987_db_user:nplCvy8A7jSwSiW1@cluster0.aknzayv.mongodb.net/RYDER';
+const MONGO_URL = process.env.MONGO_URL ;
 
 interface TestUser {
   name: string;
@@ -49,7 +49,7 @@ const testUsers: TestUser[] = [
 async function seedTestUsers() {
   try {
     console.log('Connecting to database...');
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(MONGO_URL as string);
     console.log('Connected successfully!');
 
     const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema({

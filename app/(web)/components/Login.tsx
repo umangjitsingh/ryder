@@ -8,14 +8,14 @@ import {useDispatch} from "react-redux";
 import {setFormType} from "@/app/redux/modalSlice";
 import toast from "react-hot-toast";
 import {doLogin, LoginState} from "@/app/serverActions/login";
-import {signIn, useSession} from "next-auth/react";
+import {signIn} from "next-auth/react";
 
 
 export default function Login({onClose}: { onClose: () => void }) {
 		const [showPassword, setShowPassword] = useState(false);
 		const dispatch = useDispatch();
-		const {data}=useSession();
-		console.log("data->",data)
+
+
 		const initialState:LoginState={
 				success:false,
 				errors:{}

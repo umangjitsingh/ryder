@@ -4,7 +4,7 @@ import Header from "@/app/(web)/components/Header";
 
 export default function Home() {
 		return (
-			<div className="min-h-screen bg-[#121212]">
+			<div className="min-h-screen bg-[#121212] flex flex-col">
 					{/* Background decorative elements */}
 					<div className="fixed inset-0 overflow-hidden pointer-events-none">
 							<div className="absolute -top-40 -right-40 w-80 h-80 bg-zinc-900/10 rounded-full blur-3xl"></div>
@@ -14,11 +14,11 @@ export default function Home() {
 
 					<Header/>
 
-					<main className="relative z-10 pt-20 max-h-screen overflow-hidden">
+					<main className="relative z-10 pt-20 flex-1">
 							<div className="absolute top-1/4 left-1/4 w-40 h-40 bg-zinc-950/90 rounded-full blur-2xl"></div>
 							<PublicHome/>
 					</main>
-
+			
 					<Footer/>
 			</div>
 		);

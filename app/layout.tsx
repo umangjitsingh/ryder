@@ -44,7 +44,7 @@ export default function RootLayout({
       lang="en"
       className={`${rubik.variable} ${arimo.variable} ${time.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="  flex flex-col">
       <Providers>
         {children}
         <Toaster
@@ -56,7 +56,7 @@ export default function RootLayout({
               padding: '16px',
               background: "#111",
               color: "#fff",
-            },
+            }
           }}
         />
       </Providers>

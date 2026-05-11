@@ -5,12 +5,15 @@ import VehicleSlider from "@/app/(web)/components/VehicleSlider";
 import AuthForm from "@/app/(web)/components/AuthForm";
 import Hero from "@/app/(web)/components/Hero";
 import {useSelector} from "react-redux";
-import {RootState} from "@/app/redux/appStore";
 import {selectIsModalOpen} from "@/app/redux/modalSlice";
+import {selectUser} from "@/app/redux/userSlice";
 
 
 
 const PublicHome = () => {
+		const user=useSelector(selectUser);
+
+		console.log("user===>",user)
 
 	const isModalOpen = useSelector(selectIsModalOpen);
 
