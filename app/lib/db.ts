@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
+
 const mongoDbUrl = process.env.MONGO_URL;
 if (!mongoDbUrl) throw new Error("db url not found.");
+
 
 let cached = global.mongooseBox;
 if (!cached) {

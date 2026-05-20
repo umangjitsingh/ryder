@@ -8,34 +8,42 @@ import {useDispatch} from "react-redux";
 import {setFormType} from "@/app/redux/modalSlice";
 import toast from "react-hot-toast";
 import {doLogin, LoginState} from "@/app/serverActions/login";
-import {signIn} from "next-auth/react";
-
+import {signIn, useSession} from "next-auth/react";
 
 export default function Login({onClose}: { onClose: () => void }) {
 		const [showPassword, setShowPassword] = useState(false);
 		const dispatch = useDispatch();
+		const {update} = useSession();
 
-
-		const initialState:LoginState={
-				success:false,
-				errors:{}
+		const initialState: LoginState = {
+				success: false,
+				errors: {}
 		}
 
-		const [state,formAction,isPending]=useActionState(doLogin,initialState);
+		const [state, formAction, isPending] = useActionState(doLogin, initialState);
 		useEffect(() => {
-				if (state.message) {
-						// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-						state.success ? toast.success(state.message) : toast.error(state.message);
+				if (state.success && state.message) {
+						toast.success(state.message);
+						// Update session to trigger re-validation
+
+						update();
+
+						// Close modal after successful login
+						setTimeout(() => {
+								onClose();
+						}, 500);
+				} else if (state.message && !state.success) {
+						toast.error(state.message);
 				}
-		}, [state.message, state.success]);
+		}, [state.message, state.success, onClose]);
 
 		async function handleGoogleLogin() {
 				await signIn("google")
 		}
 
 		return (
-			<div className="text-gray-300 py-2">
-					<div className="text-2xl flex justify-end w-full pr-2">
+			<div className="text-gray-300 py-2 ">
+					<div className="text-lg sm:text-2xl flex justify-end  w-full pr-2">
 							<MdClose className="hover:text-green-400 cursor-pointer" onClick={onClose}/>
 					</div>
 
@@ -43,7 +51,7 @@ export default function Login({onClose}: { onClose: () => void }) {
 							<h1 className="text-2xl font-semibold">Welcome back</h1>
 							<h6 className="text-sm text-gray-400 leading-8">Sign in to your account</h6>
 
-							<button onClick={handleGoogleLogin}  className="flex items-center justify-center gap-2 bg-[#212121] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] outline outline-white/20 outline-offset-4 hover:outline-white/30 rounded-lg py-3 w-full mt-4 font-semibold text-base">
+							<button onClick={handleGoogleLogin} className="flex items-center justify-center gap-2 bg-[#212121] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] outline outline-white/20 outline-offset-4 hover:outline-white/30 rounded-lg py-3 w-full mt-4 font-semibold text-base">
 									<IoLogoGoogle className="h-5 w-5 text-white/40"/>
 									Continue with Google
 							</button>
@@ -66,7 +74,7 @@ export default function Login({onClose}: { onClose: () => void }) {
 												required
 												disabled={isPending}
 											/>
-											{state?.errors?.email && (<p className="text-sm text-red-600">{state?.errors.email.map((item,index) => (
+											{state?.errors?.email && (<p className="text-sm text-red-600">{state?.errors.email.map((item, index) => (
 												<div key={index}>
 														{item}
 												</div>
@@ -77,14 +85,14 @@ export default function Login({onClose}: { onClose: () => void }) {
 											<label className="text-sm text-white mb-2">Password</label>
 											<input
 												name="password"
-												type={showPassword ? "password" : "text"}
+												type={showPassword ? "text" : "password"}
 												placeholder="......"
 												autoComplete="new-password"
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2 pt-1 placeholder-white/50 placeholder:text-2xl -placeholder:tracking-tighter placeholder:font-serif  "
 												disabled={isPending}
 											/>
 											{state?.errors?.password && (
-												<p className="text-sm text-red-600">{state?.errors?.password.map((item,index) => (
+												<p className="text-sm text-red-600">{state?.errors?.password.map((item, index) => (
 													<div key={index}>
 															{item}
 													</div>

@@ -7,6 +7,7 @@
       <node color="5" path="$PROJECT_DIR$/app/(web)" />
       <node color="6" path="$PROJECT_DIR$/app/api" />
       <node color="5" path="$PROJECT_DIR$/app/bookings" />
+      <node color="9" path="$PROJECT_DIR$/app/customHooks" />
       <node color="6" path="$PROJECT_DIR$/app/global.d.ts" />
       <node color="5" path="$PROJECT_DIR$/app/globals.css" />
       <node color="5" path="$PROJECT_DIR$/app/layout.tsx" />

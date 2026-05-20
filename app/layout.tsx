@@ -3,6 +3,8 @@ import {Arimo, Rubik, Oswald} from "next/font/google";
 import "./globals.css";
 import {Providers} from "@/app/providers";
 import {Toaster} from "react-hot-toast";
+import Header from "@/app/(web)/components/Header";
+
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -39,6 +41,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html
       lang="en"
@@ -46,6 +49,7 @@ export default function RootLayout({
     >
       <body className="  flex flex-col">
       <Providers>
+        <Header/>
         {children}
         <Toaster
           position="bottom-center"
@@ -59,6 +63,7 @@ export default function RootLayout({
             }
           }}
         />
+
       </Providers>
 
       </body>

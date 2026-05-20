@@ -34,7 +34,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 
 		return (
 			<div className="text-gray-300 py-2">
-					<div className=" text-2xl flex justify-end w-full pr-2">
+					<div className="text-lg sm:text-2xl flex justify-end w-full pr-2">
 							<MdClose className="hover:text-green-400 cursor-pointer" onClick={onClose}/>
 					</div>
 
@@ -87,7 +87,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 											<label className="text-sm text-white mb-2">Password</label>
 											<input
 												name="password"
-												type={showPassword ? "password" : "text"}
+												type={showPassword ? "text" : "password"}
 												placeholder="......"
 												autoComplete="new-password"
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 pb-2 pt-1 placeholder-white/50 placeholder:text-2xl -placeholder:tracking-tighter placeholder:font-serif  "

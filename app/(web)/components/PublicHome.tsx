@@ -7,6 +7,7 @@ import Hero from "@/app/(web)/components/Hero";
 import {useSelector} from "react-redux";
 import {selectIsModalOpen} from "@/app/redux/modalSlice";
 import {selectUser} from "@/app/redux/userSlice";
+import Footer from "@/app/(web)/components/Footer";
 
 
 
@@ -22,6 +23,7 @@ const PublicHome = () => {
 			<Hero/>
 			<VehicleSlider/>
 			{isModalOpen && <AuthForm />}
+				<Footer/>
 		</div>
 	)
 }

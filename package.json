@@ -10,6 +10,15 @@
     "seed:test-users": "npx tsx scripts/seed-test-users.ts"
   },
   "dependencies": {
+    "@iconify-react/duo-icons": "^1.0.2",
+    "@iconify-react/fontisto": "^1.0.2",
+    "@iconify-react/ion": "^1.0.3",
+    "@iconify-react/material-symbols-light": "^1.0.15",
+    "@iconify-react/mdi": "^1.0.2",
+    "@iconify-react/simple-icons": "^1.0.13",
+    "@iconify-react/solar": "^1.0.2",
+    "@iconify-react/subway": "^1.0.2",
+    "@iconify-react/tabler": "^1.0.9",
     "@reduxjs/toolkit": "^2.11.2",
     "bcryptjs": "^3.0.3",
     "mongoose": "^9.6.0",

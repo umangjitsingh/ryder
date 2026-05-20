@@ -1,4 +1,5 @@
 "use client"
+import { motion } from "motion/react";
 import React, {useEffect, useState} from "react";
 
 const Footer = () => {
@@ -61,14 +62,22 @@ const Footer = () => {
 		}, []);
 
 		return (
-			<div className="absolute bottom-0 text-white w-full py-8 mt-auto">
-					<div className="flex items-center justify-end uppercase gap-4 pr-20 font-extralight text-sm text-white/70 tracking-wider">
+			<div className="text-white w-full py-8 ">
+					<motion.div
+						initial={{opacity:0,y:40}}
+						whileInView={{opacity:1,y:0}}
+						transition={{duration:0.8,ease:"easeIn"}}
+						viewport={{once:true}}
+
+						className="max-w-7xl mx-auto px-6 py-18"
+						>
 							<span>{location}</span>
 							<span>{time}</span>
-					</div>
+					</motion.div>
 			</div>
 		);
 };
 
 export default Footer;
 
+// className="flex items-center justify-end uppercase gap-4 pr-20 font-extralight text-sm text-white/70 tracking-wider"
