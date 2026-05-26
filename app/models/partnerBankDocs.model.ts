@@ -33,6 +33,7 @@ const partnerBankDocsSchema = new mongoose.Schema<IPartnerBankDocs>({
 		},
 		upi: String,
 
+
 		status: {
 				type: String,
 				enum: ["not_added", "added", "verified"],

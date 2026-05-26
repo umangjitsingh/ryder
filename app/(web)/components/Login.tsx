@@ -74,7 +74,7 @@ export default function Login({onClose}: { onClose: () => void }) {
 												required
 												disabled={isPending}
 											/>
-											{state?.errors?.email && (<p className="text-sm text-red-600">{state?.errors.email.map((item, index) => (
+											{state?.errors?.email && (<p className="text-sm text-red-400 capitalize">{state?.errors.email.map((item, index) => (
 												<div key={index}>
 														{item}
 												</div>
@@ -92,7 +92,7 @@ export default function Login({onClose}: { onClose: () => void }) {
 												disabled={isPending}
 											/>
 											{state?.errors?.password && (
-												<p className="text-sm text-red-600">{state?.errors?.password.map((item, index) => (
+												<p className="text-sm text-red-400 capitalize">{state?.errors?.password.map((item, index) => (
 													<div key={index}>
 															{item}
 													</div>

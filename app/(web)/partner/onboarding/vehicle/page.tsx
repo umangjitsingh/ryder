@@ -1,6 +1,6 @@
 "use client"
 import {motion} from 'motion/react'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/navigation";
 import CarIcon from '@iconify-react/duo-icons/car';
 import ElectricBikeRoundedIcon from '@iconify-react/material-symbols-light/electric-bike-rounded';
@@ -8,10 +8,11 @@ import VanUtilityIcon from '@iconify-react/mdi/van-utility';
 import CarSportSharpIcon from '@iconify-react/ion/car-sport-sharp';
 import TruckIcon from '@iconify-react/fontisto/truck';
 import DroneIcon from '@iconify-react/simple-icons/drone';
+import toast from "react-hot-toast";
 
 const VEHICLES=[
 		{id:'bike',label:"Bike",icon:<ElectricBikeRoundedIcon height="2.9em" />,desc:"2-wheeler ride"},
-		{id:'van',label:"Van",icon:<VanUtilityIcon height="2.9em" />,desc:"24-feet ride"},
+		{id:'auto',label:"Auto",icon:<VanUtilityIcon height="2.9em" />,desc:"3-wheeler ride"},
 		{id:'car',label:"Car",icon:<CarSportSharpIcon height="2.9em" />,desc:"compact-cars & suvs  rides"},
 		{id:'truck',label:"Truck",icon:<TruckIcon height="2.9em" />,desc:"heavy goods"},
 		{id:'drone',label:"Drone",icon:<DroneIcon height="2.9em" />,desc:"food delivery"}
@@ -21,7 +22,53 @@ const Page = () => {
 		const[activeVehicle,setActiveVehicle]=useState("");
 		const[vehicleNumber,setVehicleNumber]=useState("");
 		const [vehicleModel,setVehicleModel]=useState("");
+		const [error,setError]=useState("")
 		const router=useRouter();
+
+
+		useEffect(()=>{
+				toast.error(error)
+		},[error])
+
+		async function handleVehicle() {
+				try{
+						const number=vehicleNumber.toUpperCase();
+						const model=vehicleModel.toUpperCase();
+						const url = new URL('/api/partner/onboarding/vehicle', process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000');
+						const res = await fetch(url, {
+								method: "POST",
+								headers: {
+										"Content-Type": "application/json"
+								},
+								body: JSON.stringify({
+										type:activeVehicle, vehicleModel:model, vehicleNumber:number
+								})
+						});
+
+
+						if (!res.ok) {
+								const errorData = await res.json();
+								console.error("Vehicle Registration API error:", errorData);
+								setError(errorData.message)
+								return {
+										success: false,
+										message: errorData.message || "Vehicle Registration failed"
+								};
+						}
+						const data=await res.json();
+						router.push('/partner/onboarding/documents')
+						console.log(data)
+						return {
+								success:true,
+								data
+						}
+
+				}
+				catch (e) {
+						console.log(e)
+				}
+		}
+
 		return (
 			<div className="text-white min-h-screen bg-linear-to-br from-[#121212] via-[#1a1a1a] to-[#0f0f0f] flex items-center justify-center px-4 py-8">
 					<motion.div initial={{opacity: 0, y: 40}} animate={{opacity: 1, y: 0}} transition={{duration: 0.5, ease: [0.16, 1, 0.9, 1]}}
@@ -74,17 +121,17 @@ const Page = () => {
 									<input type="text" id="vn" placeholder="Enter License Plate: e.g. CFBS 104"
 									       value={vehicleNumber}
 									       onChange={(e)=>setVehicleNumber(e.target.value)}
-									       className="mt-3 cursor-text w-full border-b-2 border-gray-700 pb-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 transition-all duration-300 bg-transparent"/>
+									       className="mt-3 cursor-text w-full border-b-2 border-gray-700 pb-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 transition-all duration-300 bg-transparent autofill:bg-transparent [-webkit-autofill:bg:transparent] [-webkit-autofill:text:white] [-webkit-box-shadow:0_0_0_1000px_transparent_inset]"/>
 							</div>
 							<div className="mt-8">
 									<label htmlFor="vm" className="text-sm font-semibold text-gray-300 uppercase tracking-wide">Vehicle Model</label>
 									<input type="text" id="vm" placeholder="Enter Full Model and Year: e.g. Audi Q5 2022"
 									       value={vehicleModel}
 									       onChange={(e)=>setVehicleModel(e.target.value)}
-									       className="cursor-text mt-3 w-full border-b-2 border-gray-700 pb-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 transition-all duration-300 bg-transparent"/>
+									       className="cursor-text mt-3 w-full border-b-2 border-gray-700 pb-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-emerald-400 transition-all duration-300 bg-transparent autofill:bg-transparent [-webkit-autofill:bg:transparent] [-webkit-autofill:text:white] [-webkit-box-shadow:0_0_0_1000px_transparent_inset]"/>
 							</div>
 
-							<div className="w-full flex items-center justify-center mt-10">
+							<div className="w-full flex items-center justify-center mt-10" onClick={handleVehicle}>
 									<motion.button 
 										whileHover={{ scale: 1.02 }}
 										whileTap={{ scale: 0.98 }}
@@ -92,6 +139,7 @@ const Page = () => {
 											Continue
 									</motion.button>
 							</div>
+
 
 					</motion.div>
 			</div>

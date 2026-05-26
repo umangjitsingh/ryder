@@ -6,7 +6,7 @@ const PUBLIC_ROUTES = ['/'];
 
 export async function proxy(req: NextRequest) {
 		const {pathname} = req.nextUrl;
-		console.log("pathname->", pathname)
+
 		if (
 			pathname.startsWith('/_next') ||
 			pathname.startsWith('/favicon.ico') ||

@@ -65,7 +65,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 												className="bg-[#212121]/70 border border-white/20 rounded-lg px-4 py-1.5 placeholder-white/50 placeholder:text-[15px] placeholder:tracking-wide"
 												disabled={isPending}
 											/>
-											{	state?.errors?.name && (<p className="text-red-600 text-sm">{state?.errors?.name}</p>)}
+											{	state?.errors?.name && (<p className="text-red-400 capitalize text-sm">{state?.errors?.name}</p>)}
 									</div>
 
 									<div className="flex flex-col mt-4">
@@ -80,7 +80,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 												onChange={(e) => setEmailLocal(e.target.value)}
 												value={email}
 											/>
-											{state?.errors?.email && (<p className="text-sm text-red-600">{state.errors.email}</p>)}
+											{state?.errors?.email && (<p className="text-sm text-red-400 capitalize">{state.errors.email}</p>)}
 									</div>
 
 									<div className="flex flex-col mt-4 relative">
@@ -94,7 +94,7 @@ const Register = ({onClose}: { onClose: () => void }) => {
 												disabled={isPending}
 											/>
 											{state?.errors?.password && (
-												<p className="text-sm text-red-600">{state.errors?.password}</p>
+												<p className="text-sm text-red-400 capitalize">{state.errors?.password}</p>
 											)}
 											<div className="bg-[#202020] h-8 w-8 absolute right-0.75 top-7.75 rounded-md flex items-center justify-center border border-white/10" onClick={() => setShowPassword(!showPassword)}>
 													{showPassword ? <LuEye className="text-white/40"/> : <LuEyeClosed className="text-white/40"/>}

@@ -26,6 +26,7 @@ const connectDb = async () => {
    }
 
    try {
+
       return await cached.pendingConnection;
    } catch (err) {
       cached.pendingConnection = null;

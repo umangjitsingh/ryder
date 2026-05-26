@@ -38,7 +38,7 @@ const Page = () => {
 													<p className="text-sm font-semibold text-gray-400">Aadhaar /<strong className="text-[#cfa200] text-xs"> ID Proof</strong>  </p>
 													<p className="text-xs text-gray-400/80">Government issued ID</p>
 											</div>
-											<motion.div whileHover={{scale:1.07}} transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
+											<motion.div whileHover={{filter:"sepia(0.7)"}} transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
 													<span className="text-xs text-gray-200">Upload</span>
 													<CloudUploadIcon height="1.2em" style={{ color: 'rgb(207 162 0 / 0.69)' }} />
 											</motion.div>
@@ -49,7 +49,8 @@ const Page = () => {
 													<p className="text-sm font-semibold text-gray-400">Driving License </p>
 													<p className="text-xs text-gray-400/80">Valid driving license</p>
 											</div>
-											<motion.div whileHover={{scale:1.07}} transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
+											<motion.div whileHover={{ filter: "sepia(0.7) " }}
+											            transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
 													<span className="text-xs text-gray-200">Upload</span>
 													<CloudUploadIcon height="1.2em" style={{ color: 'rgb(207 162 0 / 0.69)' }} />
 											</motion.div>
@@ -60,7 +61,7 @@ const Page = () => {
 													<p className="text-sm font-semibold text-gray-400"> Vehicle RC </p>
 													<p className="text-xs text-gray-400/80">Vehicle Registration Certificate</p>
 											</div>
-											<motion.div whileHover={{scale:1.07}} transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
+											<motion.div whileHover={{filter:"sepia(0.7)"}} transition={{duration: 0.2, ease: [0.16, 1, 0.9, 1]}} className="flex gap-1 items-center justify-center bg-[#242424] px-4 py-1.5 rounded-full border border-white/20">
 													<span className="text-xs text-gray-200">Upload</span>
 													<CloudUploadIcon height="1.2em" style={{ color: 'rgb(207 162 0 / 0.69)' }} />
 											</motion.div>

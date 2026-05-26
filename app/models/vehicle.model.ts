@@ -33,12 +33,14 @@ const vehicleSchema=new mongoose.Schema<IVehicle>({
 		},
 		vehicleModel:{
 				type:String,
-				required:true
+				required:true,
+				uppercase:true
 		},
 		vehicleNumber:{
 				type:String,
 				required:true,
-				unique:true
+				unique:true,
+				uppercase:true
 		},
 		imageUrl:{type:String},
 		baseFare:{type:Number},
