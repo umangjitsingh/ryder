@@ -63,14 +63,14 @@ export async function POST(req: NextRequest) {
 					{upsert:true,new:true}
 				)
 
-				if(user.partnerOnBoardingSteps <2){
+				if(user.partnerOnboardingSteps <2){
 						user.partnerOnboardingSteps=2
 				}
 				await user.save()
 				return NextResponse.json(partnerDocs,{status:201})
 
 		} catch (e) {
-				const errorMessage = e instanceof Error ? e.message : "step 2 error";
+				const errorMessage = e instanceof Error ? e.message : "Error Uploading documents";
 				return NextResponse.json({message: errorMessage}, {status: 500})
 		}
 }

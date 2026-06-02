@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
 				user.mobileNumber = mobileNumber;
 
-				if (user.partnerOnBoardingSteps < 3) {
+				if (user.partnerOnboardingSteps < 3) {
 						user.partnerOnboardingSteps = 3
 				}
 				await user.save();

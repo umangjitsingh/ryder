@@ -41,10 +41,7 @@ export async function POST(req: Request) {
 						return Response.json({message: "vehicle number is not correct"}, {status: 400})
 				}
 
-				const duplicateNumber = await Vehicle.findOne({vehicleNumber: vehicleNumber});
-				if (duplicateNumber) {
-						return Response.json({message: "vehicle already registered !"}, {status: 400})
-				}
+
 
 				let vehicle = await Vehicle.findOne({owner: session.user?.id});
 				if (vehicle) {
@@ -58,6 +55,12 @@ export async function POST(req: Request) {
 								status: 200
 						})
 				}
+
+				const duplicateNumber = await Vehicle.findOne({vehicleNumber: vehicleNumber});
+				if (duplicateNumber) {
+						return Response.json({message: "vehicle already registered !"}, {status: 400})
+				}
+
 				vehicle = await Vehicle.create({
 						type,
 						vehicleModel,

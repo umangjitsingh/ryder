@@ -9,7 +9,8 @@ export interface IUser extends Document {
 		mobileNumber?:string;
 		otp?:string;
 		otpExpiresAt?:Date;
-		partnerOnboardingSteps:number
+		partnerOnboardingSteps:number;
+		partnerStatus?:"pending" | "approved" | "rejected"
 }
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -48,7 +49,12 @@ const userSchema = new mongoose.Schema<IUser>({
 				min:0,
 				max:8,
 				default:0
-		}
+		},
+		partnerStatus:{
+				type:String,
+				enum:["pending","approved","rejected"],
+				default:"pending"
+		},
 
 }, {timestamps: true});
 

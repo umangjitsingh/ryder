@@ -70,3 +70,51 @@ export default function RootLayout({
     </html>
   );
 }
+
+/*
+============================================================================
+  PERFORMANCE OPTIMIZATION RECOMMENDATIONS - layout.tsx
+============================================================================
+
+✅ CURRENT STRENGTHS:
+- Server Component by default (good for performance)
+- Font optimization using next/font (eliminates layout shift)
+- Metadata exported for SEO
+
+⚠️ IMPROVEMENTS NEEDED:
+
+1. HEADER SERVER/CLIENT SPLIT:
+   - Header is rendered as client component but could be partially server-rendered
+   - Consider: Split Header into HeaderServer (static parts) + HeaderClient (interactive parts)
+   - This reduces JavaScript bundle size on initial load
+
+2. TOASTER OPTIMIZATION:
+   - Toaster is rendered on every page even when not needed
+   - Consider: Lazy load Toaster only on pages that use it
+   - Or: Render Toaster conditionally based on route
+
+3. BACKGROUND ELEMENTS:
+   - Decorative background divs in providers.tsx are rendered on every page
+   - Consider: Move to CSS as pseudo-elements or use 'content-visibility: auto'
+   - This reduces DOM nodes and improves paint performance
+
+4. FONT LOADING STRATEGY:
+   - Currently loading 3 font families with multiple weights
+   - Consider: Use 'display: swap' (already done by next/font)
+   - Preload only critical font weights (400, 700) and lazy load others
+   - Example: variable: "--font-rubik", preload: true
+
+5. VIEWPORT CONFIGURATION:
+   - Add viewport export for better mobile performance
+   - export const viewport = { width: 'device-width', initialScale: 1 }
+
+6. STATIC ASSETS OPTIMIZATION:
+   - favicon.svg should be converted to multiple formats (.ico, .png)
+   - Use next/image for any images in the future
+
+7. REVALIDATION STRATEGY:
+   - If layout depends on dynamic data (e.g., user preferences), add revalidation
+   - export const revalidate = 3600; // Revalidate every hour
+
+============================================================================
+*/

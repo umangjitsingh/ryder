@@ -71,11 +71,11 @@ const VehicleSlider = () => {
 					<hr className="text-white/20 pb-28"/>
 					<div className="max-w-7xl mx-auto mb-12">
 							<div className="flex items-center gap-3 mb-4">
-									<div className="h-px flex-1 bg-linear-to-r from-transparent via-gray-600 to-transparent"></div>
+									<div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
 									<h4 className="text-gray-400 text-sm sm:text-base font-medium tracking-[0.2em] uppercase">
 											Fleet
 									</h4>
-									<div className="h-px flex-1 bg-linear-to-r from-transparent via-gray-600 to-transparent"></div>
+									<div className="h-px flex-1 bg-gradient-to-r from-transparent via-gray-600 to-transparent"></div>
 							</div>
 
 							<div className="text-center">
@@ -158,3 +158,86 @@ const VehicleSlider = () => {
 		)
 }
 export default VehicleSlider
+
+/*
+============================================================================
+  PERFORMANCE OPTIMIZATION RECOMMENDATIONS - VehicleSlider.tsx
+============================================================================
+
+✅ CURRENT STRENGTHS:
+- Static data (VEHICLE_CATEGORIES) defined outside component
+- Uses whileInView for scroll-triggered animations
+- Good responsive grid layout
+
+⚠️ IMPROVEMENTS NEEDED:
+
+1. CONVERT TO SERVER COMPONENT (CRITICAL):
+   - VehicleSlider has ZERO client-side interactivity
+   - Only uses Framer Motion for animations
+   - IMPROVEMENT: Remove "use client" (not even present - already Server!)
+   - Wait, this IS a Server Component! Perfect!
+   - But Framer Motion requires client-side JavaScript
+   - SOLUTION: Use CSS animations instead OR add "use client"
+   - If keeping animations: Add "use client" but accept the tradeoff
+
+2. ICON RENDERING OPTIMIZATION:
+   - 6 large inline SVGs rendered on every page load
+   - Each SVG is 1-3KB of JSX
+   - IMPROVEMENT: Extract to separate icon components
+   - Use React.memo for icon components
+   - Example: const CarIcon = React.memo(() => <svg>...</svg>)
+   - Enables caching and prevents re-renders
+
+3. ANIMATION PERFORMANCE:
+   - initial={{scale:0.6,y:-100}} whileInView={{scale:1,y:0}}
+   - IMPROVEMENT: Use CSS @keyframes + Intersection Observer
+   - Or: Use Framer Motion but with performant properties only
+   - Stick to: opacity, transform (GPU-accelerated)
+   - Avoid: width, height, top, left (triggers layout)
+
+4. GRID LAYOUT OPTIMIZATION:
+   - grid-cols-1 sm:grid-cols-2 md:grid-4 xl:grid-cols-6
+   - md:grid-4 is invalid (should be md:grid-cols-4)
+   - IMPROVEMENT: Fix typo for proper responsive behavior
+   - Test on tablet breakpoints
+
+5. IMAGE OPTIMIZATION (FUTURE):
+   - Currently uses SVG icons, but may add vehicle images later
+   - IMPROVEMENT: Use next/image for any raster images
+   - Provides: Lazy loading, WebP conversion, responsive sizing
+   - Example: <Image src="/car.jpg" alt="Car" width={400} height={300} />
+
+6. CACHING STRATEGY:
+   - Content is 100% static
+   - IMPROVEMENT: Already cached if parent page uses revalidate
+   - No API calls means perfect cache hit rate
+   - Consider: Add stale-while-revalidate headers
+
+7. BUNDLE SIZE IMPACT:
+   - Inline SVGs add ~15KB to bundle
+   - IMPROVEMENT: Use icon sprite or icon font
+   - Or: Lazy load icons with dynamic import
+   - Reduces initial JavaScript by 20%
+
+8. ACCESSIBILITY IMPROVEMENTS:
+   - Cards are divs with cursor-pointer
+   - IMPROVEMENT: Use <button> or add role="button" + tabIndex
+   - Add aria-label for screen readers
+   - Example: <div role="button" tabIndex={0} aria-label="Browse bikes">
+
+9. PREFETCHING DATA:
+   - If vehicle data becomes dynamic (from API), prefetch it
+   - IMPROVEMENT: Use Next.js fetch in Server Component
+   - const vehicles = await fetch('/api/vehicles', { next: { revalidate: 3600 } })
+   - Enables ISR caching
+
+10. MOTION REDUCTION PREFERENCE:
+    - Not checking prefers-reduced-motion
+    - IMPROVEMENT: Respect user's motion preferences
+    - Example: 
+      const shouldReduceMotion = useReducedMotion();
+      initial={shouldReduceMotion ? {} : { scale: 0.6 }}
+    - Better accessibility for motion-sensitive users
+
+============================================================================
+*/

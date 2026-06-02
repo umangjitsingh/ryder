@@ -72,13 +72,32 @@ export const {handlers, signIn, signOut, auth} = NextAuth({
 				},
 
 
-				async jwt({token, user}) {
+				async jwt({token, user, trigger}) {
+						// On initial login, use the user object
 						if (user) {
 								token.id = user.id as string;
 								token.role = user.role as string;
 								token.email = user.email as string;
 								token.name = user.name;
 						}
+									
+						// Refresh role from database on every token check
+						// This ensures database changes are reflected immediately
+						if (token.email) {
+								try {
+										await connectDb();
+										const dbUser = await User.findOne({ email: token.email }).lean();
+										if (dbUser) {
+												// Update token with latest role from database
+												token.role = dbUser.role;
+												token.name = dbUser.name;
+										}
+								} catch (error) {
+										console.error('Failed to refresh user role in JWT:', error);
+										// Continue with cached role if DB fetch fails
+								}
+						}
+									
 						return token;
 				},
 

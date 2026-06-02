@@ -15,7 +15,7 @@ export async function proxy(req: NextRequest) {
 		) {
 				return NextResponse.next();
 		}
-		if (pathname.startsWith('api/auth')) {
+		if (pathname.startsWith('/api/auth')) {
 				return NextResponse.next();
 		}
 		if (PUBLIC_ROUTES.includes(pathname)) {

@@ -21,6 +21,8 @@ body {
     font-family: var(--font-time),sans-serif;
 }
 
+
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -29,3 +31,4 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: white !important;
     transition: background-color 9999s ease-in-out 0s;
 }
+

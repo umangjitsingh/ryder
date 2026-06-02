@@ -5,6 +5,8 @@
       <node color="8" path="$PROJECT_DIR$" />
       <node color="4" path="$PROJECT_DIR$/app" />
       <node color="5" path="$PROJECT_DIR$/app/(web)" />
+      <node color="10" path="$PROJECT_DIR$/app/(web)/components/API_TESTER.jsx" />
+      <node color="6" path="$PROJECT_DIR$/app/(web)/components/Tester" />
       <node color="6" path="$PROJECT_DIR$/app/api" />
       <node color="5" path="$PROJECT_DIR$/app/bookings" />
       <node color="9" path="$PROJECT_DIR$/app/customHooks" />
@@ -20,6 +22,7 @@
       <node color="10" path="$PROJECT_DIR$/app/serverActions" />
       <node color="6" path="$PROJECT_DIR$/app/types" />
       <node color="6" path="$PROJECT_DIR$/app/types.d.ts" />
+      <node color="1" path="$PROJECT_DIR$/app/zego" />
     </files>
     <colors>
       <color id="1" value="#4f060d" name="Color 1" enabled="true" />
@@ -31,7 +34,7 @@
       <color id="7" value="#311333" name="Color 7" enabled="true" />
       <color id="8" value="#262626d7" name="Color 8" enabled="true" />
       <color id="9" value="#403506df" name="Color 9" enabled="true" />
-      <color id="10" value="#232323f0" name="Color 10" enabled="true" />
+      <color id="10" value="#081223f0" name="Color 10" enabled="true" />
     </colors>
     <option name="marksForCollapsedHighlights" value="Dots" />
   </component>

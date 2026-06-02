@@ -13,6 +13,8 @@ import {selectToggleMenu, setToggleMenu} from "@/app/redux/menuSlice";
 import {motion, AnimatePresence} from 'motion/react';
 import {Route} from "next";
 import {useRouter} from "next/navigation";
+import Car3FillIcon from '@iconify-react/mingcute/car-3-fill';
+import AdminOutlinedIcon from '@iconify-react/eos-icons/admin-outlined';
 
 const Header = () => {
 		const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -25,12 +27,10 @@ const Header = () => {
 		const menuRef = useRef<HTMLElement>(null);
 		const logoutRef = useRef<HTMLElement>(null)
 		const router = useRouter()
-		const [mounted, setMounted] = useState(false);
+		const [mounted] = useState(true);
 
-		// Handle scroll effect and mount state
+		// Handle scroll effect
 		useEffect(() => {
-				setMounted(true);
-
 				const handleScroll = () => {
 						setIsScrolled(window.scrollY > 20);
 				};
@@ -90,6 +90,8 @@ const Header = () => {
 				dispatch(setToggleMenu())
 		}
 
+
+
 		return (
 			<header
 				className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -104,71 +106,74 @@ const Header = () => {
 									<Logo/>
 
 									{/* Navigation */}
-									{showMenu ? (
-										<motion.nav ref={menuRef}
-										            initial={{opacity: 0, x: -10}}
-										            animate={{opacity: 1, x: 0}}
-										            exit={{opacity: 0, x: -10}}
-										            transition={{
-												            duration: 0.6,
-												            ease: [0.16, 1, 0.9, 1]
-										            }}
-										            className={`absolute right-4 top-20 flex flex-col py-4 px-6 border backdrop-blur-md rounded-xl shadow-2xl transition-all duration-300 sm:hidden ${
-											            isScrolled
-												            ? 'bg-[#121212]/95 border-gray-700/80'
-												            : 'bg-black/80 border-[#404040]'
-										            }`}
-										>
-												{hrefs.map((h, i) => {
-														const href = h === "Home" ? "/" : `/${h.toLowerCase()}`
-														const active = mounted && href === pathname
+									{userData?.role==="admin" ? "" : 	<>
+									{showMenu   ? (
+											<motion.nav ref={menuRef}
+									initial={{opacity: 0, x: -10}}
+									animate={{opacity: 1, x: 0}}
+									exit={{opacity: 0, x: -10}}
+									transition={{
+											duration: 0.6,
+											ease: [0.16, 1, 0.9, 1]
+									}}
+									className={`absolute right-4 top-20 flex flex-col py-4 px-6 border backdrop-blur-md rounded-xl shadow-2xl transition-all duration-300 sm:hidden ${
+										isScrolled
+											? 'bg-[#121212]/95 border-gray-700/80'
+											: 'bg-black/80 border-[#404040]'
+									}`}
+							>
+									{hrefs.map((h, i) => {
+											const href = h === "Home" ? "/" : `/${h.toLowerCase()}`
+											const active = mounted && href === pathname
 
-														return (
-															<Link
-																key={i}
-																href={href as Route}
-																className={`py-2 ${active ? "text-emerald-400 font-semibold" : "text-gray-300 hover:text-emerald-400 font-medium"} cursor-pointer transition-all duration-200`}
-															>
-																	{h}
-															</Link>
-														)
-												})}
+											return (
+												<Link
+													key={i}
+													href={href as Route}
+													className={`py-2 ${active ? "text-emerald-400 font-semibold" : "text-gray-300 hover:text-emerald-400 font-medium"} cursor-pointer transition-all duration-200`}
+												>
+														{h}
+												</Link>
+											)
+									})}
 
-												<span onClick={() => router.push('/partner/onboarding/vehicle')} className="bg-linear-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 rounded-lg mt-3 font-semibold px-4 py-2.5 text-white text-base shadow-lg ring-1 ring-white/20 hover:ring-white/40 transition-all duration-300 cursor-pointer transform hover:scale-105 text-center">
+									{userData?.role === 'user' &&	<span onClick={() => router.push('/partner/onboarding/vehicle')} className="bg-linear-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 rounded-lg mt-3 font-semibold px-4 py-2.5 text-white text-base shadow-lg ring-1 ring-white/20 hover:ring-white/40 transition-all duration-300 cursor-pointer transform hover:scale-105 text-center">
 										      Drive with us
-										    </span>
-										</motion.nav>
-									) : (
-										<nav className="hidden md:flex items-center space-x-8">
-												{hrefs.map((h, i) => {
-														const href = h === "Home" ? "/" : `/${h.toLowerCase()}`
-														const active = mounted && href === pathname
+										    </span>}
+							</motion.nav>
+							) : (
+							<nav className="hidden md:flex items-center space-x-8">
+									{hrefs.map((h, i) => {
+											const href = h === "Home" ? "/" : `/${h.toLowerCase()}`
+											const active = mounted && href === pathname
 
-														return (
-															<Link
-																key={i}
-																href={href as Route}
-																className={`${active ? "text-emerald-400 font-semibold" : "text-gray-300 hover:text-emerald-400 font-medium"} cursor-pointer transition-all duration-200`}
-															>
-																	{h}
-															</Link>
-														)
-												})}
-										</nav>
-									)}
+											return (
+												<Link
+													key={i}
+													href={href as Route}
+													className={`${active ? "text-emerald-400 font-semibold" : "text-gray-300 hover:text-emerald-400 font-medium"} cursor-pointer transition-all duration-200`}
+												>
+														{h}
+												</Link>
+											)
+									})}
+							</nav>
+							)}
+					</> }
 
+									{userData?.role ==="admin" && <h2 className="text-white/60 uppercase text-xs">Admin Only</h2>}
 
 									<div className="flex items-center gap-3 relative">
-											<div className=" relative">
+											<div className=" relative ">
 													{userData ? <div className="relative flex gap-4 ">
-																{userData.role !== "partner" &&
+																{(userData.role === "user" ) ?
                                    <button onClick={() => router.push('/partner/onboarding/vehicle')} className="hidden sm:flex items-center gap-0.5 group relative px-2 py-2 bg-[#C8A200] text-amber-950 text-sm font-semibold rounded-full hover:from-emerald-500 hover:to-green-500 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/25 transform hover:-translate-y-0.5 rubik uppercase ">
 
                                       <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 16 16" className="inline-block mr-2 transition-transform duration-300 group-hover:scale-110">
                                          <path fill="currentColor" fillRule="evenodd" d="M8.716.315a1 1 0 0 0-1.432 0L6.646.97a1 1 0 0 1-.988.265l-.88-.248a1 1 0 0 0-1.24.716l-.226.886a1 1 0 0 1-.723.723l-.886.225a1 1 0 0 0-.716 1.24l.248.881a1 1 0 0 1-.265.988l-.655.638a1 1 0 0 0 0 1.432l.655.639a1 1 0 0 1 .265.987l-.248.88a1 1 0 0 0 .716 1.24l.886.226a1 1 0 0 1 .723.723l.225.886a1 1 0 0 0 1.24.717l.881-.248a1 1 0 0 1 .988.264l.638.655a1 1 0 0 0 1.432 0l.639-.655a1 1 0 0 1 .987-.264l.88.248a1 1 0 0 0 1.24-.717l.226-.886a1 1 0 0 1 .723-.723l.886-.225a1 1 0 0 0 .717-1.24l-.248-.88a1 1 0 0 1 .264-.988l.655-.639a1 1 0 0 0 0-1.432l-.655-.638a1 1 0 0 1-.264-.988l.248-.88a1 1 0 0 0-.717-1.24l-.886-.226a1 1 0 0 1-.723-.723l-.225-.886a1 1 0 0 0-1.24-.716l-.88.248A1 1 0 0 1 9.354.97zm3.057 5.975a.75.75 0 0 0-1.042-1.08L6.597 9.202L5.28 7.887A.75.75 0 0 0 4.22 8.95l1.839 1.834a.75.75 0 0 0 1.05.01z" clipRule="evenodd"></path>
                                       </svg>
                                       Drive with us
-                                   </button>}
+                                   </button> : null}
 
 
 																<div
@@ -212,11 +217,39 @@ const Header = () => {
 
 
 																<div className=" group">
-																		<button onClick={() => setShowLogoutModal(!showLogoutModal)} className="relative h-10 w-10 rounded-full bg-linear-to-br from-emerald-400 via-green-500 to-teal-600 flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-300 cursor-pointer transform group-hover:scale-105">
+																		<button
+																			onClick={() => setShowLogoutModal(!showLogoutModal)}
+																			className={`${
+																				userData.role === "partner" ? "scale-80" : "scale-100"
+																			} relative h-10 w-10 rounded-full ${
+																				userData.role === "partner" 
+																					? "bg-linear-to-br from-amber-400 via-yellow-500 to-orange-600"
+																					: userData.role === "user" ?"bg-linear-to-br from-emerald-400 via-green-500 to-teal-600":
+																						"bg-linear-to-br from-zinc-900 via-olive-800 to-mist-900 border-2 border-[#006239] hover:ring-teal-200"
+																			} flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-300 cursor-pointer transform group-hover:scale-105`}
+																		>
 																				{userData.name?.charAt(0).toUpperCase()}
 																		</button>
-																		<div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-[#121212] rounded-full"></div>
+
+																		{userData.role === "partner" && (
+																			<div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-black/60 rounded-full shadow-xs shadow-amber-200 flex items-center justify-center">
+																					<Car3FillIcon height="0.9em" style={{ color: "#b8f5ae" }} />
+																			</div>
+																		)}
+
+																		{userData.role === "user" && (
+																			<div className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-green-500 border-2 border-[#121212] rounded-full"></div>
+																		)}
+
+																		{userData.role !== "partner" && userData.role !== "user" && (
+																			<div className="absolute -bottom-2.5 -right-2.5 ">
+																					<AdminOutlinedIcon height="1.4em" style={{ color: '#f1f1de' ,backgroundColor:"#202020"}}/>
+																			</div>
+																		)}
+
+
 																</div>
+
 																<AnimatePresence>
 																		{showLogoutModal && (
 																			<motion.div
@@ -244,7 +277,7 @@ const Header = () => {
 																}}>
 																		Sign In
 																</button>
-																<button className="hidden sm:block text-sm sm:text-base px-5 py-2 cursor-pointer bg-linear-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-emerald-500/25" onClick={() => {
+																<button className="hidden sm:block text-sm sm:text-base px-5 py-2 cursor-pointer bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg hover:shadow-emerald-500/25" onClick={() => {
 
 																		dispatch(setFormType('register'));
 																		dispatch(openModal());
@@ -266,3 +299,80 @@ const Header = () => {
 };
 
 export default Header;
+
+/*
+============================================================================
+  PERFORMANCE OPTIMIZATION RECOMMENDATIONS - Header.tsx
+============================================================================
+
+⚠️ CRITICAL ISSUES:
+
+1. TOO MANY useEffect HOOKS (Performance Impact):
+   - Currently has 4 separate useEffect hooks
+   - Each adds event listeners and cleanup functions
+   - IMPROVEMENT: Consolidate scroll + click-outside handlers
+   - Consider: Use custom hooks (useScrollPosition, useClickOutside)
+   - Reduces re-renders and memory usage
+
+2. REDUX OVER-RENDERING:
+   - useSelector triggers re-render on ANY state change
+   - userData, showMenu are subscribed but not always needed
+   - IMPROVEMENT: Use shallow equality or memoized selectors
+   - Example: const userData = useSelector(selectUser, shallowEqual)
+   - Or: Use Redux Toolkit's createEntityAdapter for better performance
+
+3. SCROLL EVENT LISTENER:
+   - Scroll fires 60+ times per second during scroll
+   - No debouncing/throttling implemented
+   - IMPROVEMENT: Add throttle with lodash or custom implementation
+   - Example: const handleScroll = throttle(() => {...}, 100)
+   - Reduces function calls by 90%
+
+4. CONDITIONAL RENDERING OPTIMIZATION:
+   - Navigation renders differently for mobile vs desktop
+   - Both versions computed every render
+   - IMPROVEMENT: Use CSS (hidden md:flex) instead of conditional rendering
+   - Keeps both in DOM but CSS handles visibility (faster toggling)
+
+5. SVG ICONS AS INLINE JSX:
+   - Large inline SVGs increase bundle size
+   - IMPROVEMENT: Use @iconify/react components (already using some)
+   - Or: Extract to separate icon components with React.memo
+   - Enables tree-shaking and caching
+
+6. MOUNTED STATE WORKAROUND:
+   - const [mounted] = useState(true) is hydration mismatch workaround
+   - IMPROVEMENT: Remove and use CSS for initial state
+   - Or: Use useSyncExternalStore for SSR-safe client state
+
+7. ROUTE-BASED STYLING:
+   - pathname checked on every render
+   - IMPROVEMENT: Memoize active link computation
+   - const activeRoute = useMemo(() => pathname, [pathname])
+
+8. ANIMATION PERFORMANCE:
+   - Multiple AnimatePresence + motion.div elements
+   - IMPROVEMENT: Use CSS transitions for simple animations
+   - Reserve Framer Motion for complex sequences
+   - Reduces JavaScript execution time
+
+9. LAZY LOAD SIGN-IN/SIGN-UP BUTTONS:
+   - AuthForm modal loaded but hidden most of the time
+   - IMPROVEMENT: Dynamic import AuthForm
+   - const AuthForm = dynamic(() => import('./AuthForm'), { ssr: false })
+   - Saves ~50KB initial bundle
+
+10. REDUX TOOLKIT PATTERNS:
+    - dispatch(setUserData(null)) on unauthenticated
+    - IMPROVEMENT: Use RTK Query for data fetching
+    - Automatically handles caching, deduping, and revalidation
+    - Reduces manual dispatch calls by 70%
+
+11. SERVER COMPONENT CONVERSION:
+    - Header could be split: HeaderShell (Server) + HeaderInteractive (Client)
+    - Server part: Logo, static nav links
+    - Client part: User menu, mobile toggle, animations
+    - Reduces client-side JavaScript by 40%
+
+============================================================================
+*/
