@@ -76,6 +76,7 @@ const Header = () => {
 		}, [dispatch, showLogoutModal])
 
 		const hrefs = ["Home", "Bookings", "About Us", "Contact"] as const;
+				const isAdminPage = pathname?.startsWith("/admin");
 
 		async function handleLogout() {
 				setShowLogoutModal(false);
@@ -96,8 +97,12 @@ const Header = () => {
 			<header
 				className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
 					isScrolled
-						? 'bg-[#121212]/95 backdrop-blur-md shadow-lg border-b border-gray-800/80'
-						: 'bg-[#121212]/60 backdrop-blur-sm shadow-sm border-b border-gray-700/50'
+						? isAdminPage
+							? 'bg-gray-950/95 backdrop-blur-md shadow-lg shadow-black/30 border-b border-white/[0.06]'
+							: 'bg-[#121212]/95 backdrop-blur-md shadow-lg border-b border-gray-800/80'
+						: isAdminPage
+							? 'bg-gray-950/80 backdrop-blur-sm shadow-md border-b border-white/[0.04]'
+							: 'bg-[#121212]/60 backdrop-blur-sm shadow-sm border-b border-gray-700/50'
 				}`}
 			>
 					<div className="max-w-600 mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,8 +123,12 @@ const Header = () => {
 									}}
 									className={`absolute right-4 top-20 flex flex-col py-4 px-6 border backdrop-blur-md rounded-xl shadow-2xl transition-all duration-300 sm:hidden ${
 										isScrolled
-											? 'bg-[#121212]/95 border-gray-700/80'
-											: 'bg-black/80 border-[#404040]'
+											? isAdminPage
+												? 'bg-gray-950/95 border-white/[0.08]'
+												: 'bg-[#121212]/95 border-gray-700/80'
+											: isAdminPage
+												? 'bg-gray-950/90 border-white/[0.06]'
+												: 'bg-black/80 border-[#404040]'
 									}`}
 							>
 									{hrefs.map((h, i) => {
@@ -137,7 +146,7 @@ const Header = () => {
 											)
 									})}
 
-									{userData?.role === 'user' &&	<span onClick={() => router.push('/partner/onboarding/vehicle')} className="bg-linear-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 rounded-lg mt-3 font-semibold px-4 py-2.5 text-white text-base shadow-lg ring-1 ring-white/20 hover:ring-white/40 transition-all duration-300 cursor-pointer transform hover:scale-105 text-center">
+									{userData?.role === 'user' &&	<span onClick={() => router.push('/partner/onboarding/vehicle')} className="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 rounded-lg mt-3 font-semibold px-4 py-2.5 text-white text-base shadow-lg ring-1 ring-white/20 hover:ring-white/40 transition-all duration-300 cursor-pointer transform hover:scale-105 text-center">
 										      Drive with us
 										    </span>}
 							</motion.nav>
@@ -161,7 +170,12 @@ const Header = () => {
 							)}
 					</> }
 
-									{userData?.role ==="admin" && <h2 className="text-white/60 uppercase text-xs">Admin Only</h2>}
+									{userData?.role ==="admin" && (
+																			<div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/[0.08]">
+																					<AdminOutlinedIcon height="1em" className="text-white/50"/>
+																					<span className="text-white/40 uppercase text-[10px] font-semibold tracking-widest">Admin</span>
+																			</div>
+																		)}
 
 									<div className="flex items-center gap-3 relative">
 											<div className=" relative ">
@@ -222,10 +236,10 @@ const Header = () => {
 																			className={`${
 																				userData.role === "partner" ? "scale-80" : "scale-100"
 																			} relative h-10 w-10 rounded-full ${
-																				userData.role === "partner" 
-																					? "bg-linear-to-br from-amber-400 via-yellow-500 to-orange-600"
-																					: userData.role === "user" ?"bg-linear-to-br from-emerald-400 via-green-500 to-teal-600":
-																						"bg-linear-to-br from-zinc-900 via-olive-800 to-mist-900 border-2 border-[#006239] hover:ring-teal-200"
+																				userData.role === "partner"
+																					? "bg-gradient-to-br from-amber-400 via-yellow-500 to-orange-600"
+																					: userData.role === "user" ? "bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600" :
+																						"bg-gradient-to-br from-slate-800 via-gray-900 to-zinc-950 border-2 border-emerald-700/60 hover:ring-emerald-500/40"
 																			} flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white/20 group-hover:ring-white/40 transition-all duration-300 cursor-pointer transform group-hover:scale-105`}
 																		>
 																				{userData.name?.charAt(0).toUpperCase()}
